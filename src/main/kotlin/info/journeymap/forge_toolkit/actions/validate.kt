@@ -2,7 +2,9 @@ package info.journeymap.forge_toolkit.actions
 
 import com.github.javaparser.StaticJavaParser
 import com.xenomachina.argparser.ArgParser
-import info.journeymap.forge_toolkit.*
+import info.journeymap.forge_toolkit.ValidateArgs
+import info.journeymap.forge_toolkit.Visitor
+import info.journeymap.forge_toolkit.parseJSON
 import java.io.File
 
 fun validate(args: Array<String>) {
@@ -16,8 +18,8 @@ fun validate(args: Array<String>) {
         try {
             translationKeys = jsonData?.keys?.filter {
                 it != "_comment" &&
-                ! it.startsWith("jm.common.location_") &&
-                ! it.startsWith("jm.webmap.")
+                        !it.startsWith("jm.common.location_") &&
+                        !it.startsWith("jm.webmap.")
             }?.toMutableSet()
         } catch (e: Exception) {
             System.err.println(e)

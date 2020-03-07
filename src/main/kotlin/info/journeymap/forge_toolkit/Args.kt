@@ -1,7 +1,6 @@
 package info.journeymap.forge_toolkit
 
 import com.xenomachina.argparser.ArgParser
-import com.xenomachina.argparser.default
 
 class Args(parser: ArgParser) {
     val mode by parser.mapping(
