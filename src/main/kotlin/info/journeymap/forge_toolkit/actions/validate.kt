@@ -8,7 +8,7 @@ import info.journeymap.forge_toolkit.parseJSON
 import java.io.File
 
 fun validate(args: Array<String>) {
-    ArgParser(args.slice(1 until args.size).toTypedArray()).parseInto(::ValidateArgs).run {
+    ArgParser(args).parseInto(::ValidateArgs).run {
         var translationKeys: MutableSet<String>? = null
         val quotedStrings: MutableSet<String>
 
