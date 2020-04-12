@@ -1,10 +1,8 @@
 package info.journeymap.forge_toolkit.commands
 
-import com.github.javaparser.StaticJavaParser
-import info.journeymap.forge_toolkit.Visitor
-import info.journeymap.forge_toolkit.parseJSON
+import info.journeymap.forge_toolkit.lang.getKeysInFile
+import info.journeymap.forge_toolkit.lang.visitJavaFiles
 import picocli.CommandLine
-import java.io.File
 import java.util.concurrent.Callable
 
 @CommandLine.Command(
@@ -19,17 +17,10 @@ class Validate : Callable<Int> {
     lateinit var javaDir: String
 
     override fun call(): Int {
-        var translationKeys: MutableSet<String>? = null
-
-        val visitor = Visitor(mutableSetOf<String>())
-        val jsonData = parseJSON(File(this.langFile).inputStream())
+        var translationKeys: Set<String>? = null
 
         try {
-            translationKeys = jsonData?.keys?.filter {
-                !it.startsWith("_") &&
-                        !it.startsWith("jm.common.location_") &&
-                        !it.startsWith("jm.webmap.")
-            }?.toMutableSet()
+            translationKeys = getKeysInFile(this.langFile)
         } catch (e: Exception) {
             System.err.println(e)
         }
@@ -39,16 +30,8 @@ class Validate : Callable<Int> {
             return 1
         }
 
-        File(this.javaDir).walkTopDown().filter { it.path.endsWith(".java") }.forEach {
-            try {
-                val statements = StaticJavaParser.parse(it)
-                visitor.visit(statements, null)
-            } catch (e: Exception) {
-                System.err.println("Failed to parse file: ${it.path}\n\n$e")
-            }
-        }
-
-        val difference = translationKeys - visitor.strings
+        val visitorStrings = visitJavaFiles(this.javaDir)
+        val difference = translationKeys - visitorStrings
 
         if (difference.isEmpty()) {
             println("All translation keys are used.")

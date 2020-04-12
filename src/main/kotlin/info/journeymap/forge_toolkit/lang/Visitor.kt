@@ -1,4 +1,4 @@
-package info.journeymap.forge_toolkit
+package info.journeymap.forge_toolkit.lang
 
 import com.github.javaparser.ast.expr.StringLiteralExpr
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter
