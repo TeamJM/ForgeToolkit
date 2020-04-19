@@ -3,7 +3,6 @@ package info.journeymap.forge_toolkit.commands
 import com.beust.klaxon.JsonObject
 import info.journeymap.forge_toolkit.lang.getJsonData
 import info.journeymap.forge_toolkit.lang.getKeys
-import info.journeymap.forge_toolkit.lang.getKeysInFile
 import info.journeymap.forge_toolkit.writeJSON
 import picocli.CommandLine
 import java.io.File
@@ -11,7 +10,10 @@ import java.util.concurrent.Callable
 
 @CommandLine.Command(
     name = "update",
-    description = ["Ensures that all keys from the primary lang file exist in the others provided."]
+    description = [
+        "Ensures that all keys from the primary lang file exist in the others provided.",
+        "New keys will be placed in a new object named 'untranslated'."
+    ]
 )
 class Update : Callable<Int> {
     @CommandLine.Parameters(index = "0", description = ["Path to the primary lang file containing the full set of keys"])
