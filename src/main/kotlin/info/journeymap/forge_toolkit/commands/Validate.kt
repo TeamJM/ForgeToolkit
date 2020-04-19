@@ -3,6 +3,7 @@ package info.journeymap.forge_toolkit.commands
 import info.journeymap.forge_toolkit.lang.getKeysInFile
 import info.journeymap.forge_toolkit.lang.visitJavaFiles
 import picocli.CommandLine
+import java.io.File
 import java.util.concurrent.Callable
 
 @CommandLine.Command(
@@ -11,7 +12,7 @@ import java.util.concurrent.Callable
 )
 class Validate : Callable<Int> {
     @CommandLine.Parameters(index = "0", description = ["Path to the lang file containing the keys to check"])
-    lateinit var langFile: String
+    lateinit var langFile: File
 
     @CommandLine.Parameters(index = "1", description = ["Path to the directory containing the java sources to be checked"])
     lateinit var javaDir: String

@@ -1,5 +1,7 @@
 package info.journeymap.forge_toolkit.lang
 
+import com.beust.klaxon.JsonObject
+import com.beust.klaxon.json
 import com.github.javaparser.StaticJavaParser
 import info.journeymap.forge_toolkit.parseJSON
 import java.io.File
@@ -8,11 +10,22 @@ import java.io.File
 val IGNORE_PREFIXES = arrayOf("_", "jm.common.location_", "jm.webmap.")
 
 fun getKeysInFile(langFile: String): Set<String>? {
-    val jsonData = parseJSON(File(langFile).inputStream())
+    return getKeysInFile(File(langFile))
+}
 
+fun getKeysInFile(langFile: File): Set<String>? {
+    val jsonData = getJsonData(langFile)
+    return getKeys(jsonData)
+}
+
+fun getKeys(jsonData: JsonObject?): Set<String>? {
     return jsonData?.keys?.filter {
         filterKey(it)
     }?.toSet()
+}
+
+fun getJsonData(langFile: File): JsonObject? {
+    return parseJSON(langFile.inputStream())
 }
 
 fun filterKey(key: String): Boolean {
