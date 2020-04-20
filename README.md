@@ -53,7 +53,7 @@ The `finalise` (or `finalize`) command cleans up a lang file in preparation for 
 [lang files repository](https://github.com/TeamJM/journeymap-lang).
 
 ```bash
-ForgeToolkit finalize src/main/resources/assets/journeymap/lang/sv_se.json
+ForgeToolkit finalise src/main/resources/assets/journeymap/lang/sv_se.json
 ```
 
 This will modify the lang file in-place, performing the equivalent of a `flatten` operation, followed by a `sort`
@@ -88,7 +88,7 @@ populate other lang files with the keys that are present in the primary file, if
 object will be created, and will contain those keys.
 
 Once the keys have been translated, you can use the `flatten` command to merge them into the bottom of the translated
-set of keys in the file, or the `finalize` command to both `flatten` and `sort` them into the rest of the file.
+set of keys in the file, or the `finalise` command to both `flatten` and `sort` them into the rest of the file.
 
 ```bash
 ForgeToolkit update src/main/resources/assets/journeymap/lang/en_us.json src/main/resources/assets/journeymap/lang/*.json
