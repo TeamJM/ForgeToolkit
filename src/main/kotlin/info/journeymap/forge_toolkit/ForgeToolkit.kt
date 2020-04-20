@@ -1,5 +1,6 @@
 package info.journeymap.forge_toolkit
 
+import info.journeymap.forge_toolkit.commands.Clean
 import info.journeymap.forge_toolkit.commands.Sort
 import info.journeymap.forge_toolkit.commands.Update
 import info.journeymap.forge_toolkit.commands.Validate
@@ -10,7 +11,7 @@ import kotlin.system.exitProcess
 
 @CommandLine.Command(
     name = "ForgeToolkit",
-    subcommands = [Sort::class, Update::class, Validate::class]
+    subcommands = [Clean::class, Sort::class, Update::class, Validate::class]
 )
 class ForgeToolkit : Callable<Int> {
     override fun call(): Int {
