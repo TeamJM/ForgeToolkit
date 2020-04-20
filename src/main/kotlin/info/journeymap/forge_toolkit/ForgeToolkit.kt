@@ -1,9 +1,6 @@
 package info.journeymap.forge_toolkit
 
-import info.journeymap.forge_toolkit.commands.Clean
-import info.journeymap.forge_toolkit.commands.Sort
-import info.journeymap.forge_toolkit.commands.Update
-import info.journeymap.forge_toolkit.commands.Validate
+import info.journeymap.forge_toolkit.commands.*
 import org.fusesource.jansi.AnsiConsole
 import picocli.CommandLine
 import java.util.concurrent.Callable
@@ -11,7 +8,7 @@ import kotlin.system.exitProcess
 
 @CommandLine.Command(
     name = "ForgeToolkit",
-    subcommands = [Clean::class, Sort::class, Update::class, Validate::class]
+    subcommands = [Clean::class, Flatten::class, Sort::class, Update::class, Validate::class]
 )
 class ForgeToolkit : Callable<Int> {
     override fun call(): Int {
