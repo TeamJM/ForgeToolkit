@@ -8,7 +8,7 @@ import kotlin.system.exitProcess
 
 @CommandLine.Command(
     name = "ForgeToolkit",
-    subcommands = [Clean::class, Flatten::class, Sort::class, Update::class, Validate::class]
+    subcommands = [Clean::class, Finalise::class, Flatten::class, Sort::class, Update::class, Validate::class]
 )
 class ForgeToolkit : Callable<Int> {
     override fun call(): Int {
