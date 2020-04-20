@@ -10,9 +10,7 @@ import java.util.concurrent.Callable
 
 @CommandLine.Command(
     name = "sort",
-    description = [
-        "Sorts the keys in all given lang files alphabetically."
-    ]
+    description = ["Sorts the keys in all given lang files alphabetically."]
 )
 class Sort : Callable<Int> {
     @CommandLine.Parameters(index = "0..*", arity = "1..*", description = ["Paths to each lang file to be sorted"])

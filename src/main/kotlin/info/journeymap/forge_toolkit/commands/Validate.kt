@@ -8,7 +8,7 @@ import java.util.concurrent.Callable
 
 @CommandLine.Command(
     name = "validate",
-    description = ["Checks which translation keys haven't been used in a given set of Java sources"]
+    description = ["Checks which translation keys haven't been used in a given set of Java sources."]
 )
 class Validate : Callable<Int> {
     @CommandLine.Parameters(index = "0", description = ["Path to the lang file containing the keys to check"])

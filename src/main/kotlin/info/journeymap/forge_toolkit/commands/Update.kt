@@ -33,7 +33,7 @@ class Update : Callable<Int> {
             System.err.println(e)
         }
 
-        if (sourceKeys == null) {
+        if (sourceData == null || sourceKeys == null) {
             println("Failed to load translations data.")
             return 1
         }
@@ -51,8 +51,8 @@ class Update : Callable<Int> {
                 targetData = getJsonData(file)
                 targetKeys = getKeys(targetData)
 
-                if (targetKeys != null && targetKeys.contains("untranslated")) {
-                    val untranslated = targetData!!["untranslated"] as JsonObject
+                if (targetData != null && targetKeys != null && targetKeys.contains("untranslated")) {
+                    val untranslated = targetData["untranslated"] as JsonObject
                     targetKeys = targetKeys.union(untranslated.keys)
                 }
             } catch (e: Exception) {
@@ -65,7 +65,7 @@ class Update : Callable<Int> {
                 continue
             }
 
-            if (targetKeys == null) {
+            if (targetData == null || targetKeys == null) {
                 println("Failed to get translation keys for file: ${file.path}")
                 continue
             }
@@ -80,10 +80,10 @@ class Update : Callable<Int> {
             val keyMap = JsonObject()
 
             for (missingKey in missingKeys) {
-                keyMap[missingKey] = sourceData!![missingKey]
+                keyMap[missingKey] = sourceData[missingKey]
             }
 
-            targetData!!["untranslated"] = keyMap
+            targetData["untranslated"] = keyMap
 
             writeJSON(targetData, file)
             println("Updated (${missingKeys.size} keys): ${file.path}")
